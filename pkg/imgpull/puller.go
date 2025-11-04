@@ -2,6 +2,7 @@ package imgpull
 
 import (
 	"net/http"
+	"time"
 
 	"github.com/yo-l1982/imgpull/internal/imgref"
 	"github.com/yo-l1982/imgpull/pkg/imgpull/types"
@@ -64,7 +65,16 @@ func NewPullerWith(o PullerOpts) (Puller, error) {
 		// Always create an explicit Transport (even without TLS config) to ensure
 		// proper connection cleanup and prevent memory leaks. When Transport is nil,
 		// Go uses the shared default transport which cannot be cleaned up per-client.
-		transport := &http.Transport{}
+		//
+		// Connection limits prevent memory leaks from idle TCP connections holding
+		// kernel buffers (typically 16-64KB per connection). Without limits, hundreds
+		// of connections can accumulate across multiple upstreams, consuming 300-400MB.
+		transport := &http.Transport{
+			MaxIdleConns:        10,                  // Limit total idle connections across all hosts
+			MaxIdleConnsPerHost: 2,                   // Limit idle connections per upstream registry
+			IdleConnTimeout:     30 * time.Second,    // Aggressively close idle connections
+			MaxConnsPerHost:     4,                   // Limit concurrent connections per host
+		}
 		if cfg, err := o.configureTls(); err != nil {
 			return &puller{}, err
 		} else if cfg != nil {
