@@ -5,12 +5,12 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/aceeric/imgpull/internal/imgref"
-	"github.com/aceeric/imgpull/internal/tar"
-	"github.com/aceeric/imgpull/internal/util"
-	"github.com/aceeric/imgpull/pkg/imgpull/types"
-	"github.com/aceeric/imgpull/pkg/imgpull/v1oci"
-	"github.com/aceeric/imgpull/pkg/imgpull/v2docker"
+	"github.com/yo-l1982/imgpull/internal/imgref"
+	"github.com/yo-l1982/imgpull/internal/tar"
+	"github.com/yo-l1982/imgpull/internal/util"
+	"github.com/yo-l1982/imgpull/pkg/imgpull/types"
+	"github.com/yo-l1982/imgpull/pkg/imgpull/v1oci"
+	"github.com/yo-l1982/imgpull/pkg/imgpull/v2docker"
 )
 
 // ManifestType identifies the type of manifest the package can operate on.

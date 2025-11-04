@@ -1,6 +1,6 @@
 package imgpull
 
-import "github.com/aceeric/imgpull/internal/blobsync"
+import "github.com/yo-l1982/imgpull/internal/blobsync"
 
 // SetConcurrentBlobs exposes the ability to configure blob download concurrency
 // at the package level since this function is encapsulated within the 'blobsync'

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/aceeric/imgpull/internal/util"
+	"github.com/yo-l1982/imgpull/internal/util"
 )
 
 // imgPullType specifies whether pulling my tag or digest

@@ -10,10 +10,10 @@ import (
 	"slices"
 	"strings"
 
-	"github.com/aceeric/imgpull/internal/methods"
-	"github.com/aceeric/imgpull/internal/tar"
-	"github.com/aceeric/imgpull/internal/util"
-	"github.com/aceeric/imgpull/pkg/imgpull/types"
+	"github.com/yo-l1982/imgpull/internal/methods"
+	"github.com/yo-l1982/imgpull/internal/tar"
+	"github.com/yo-l1982/imgpull/internal/util"
+	"github.com/yo-l1982/imgpull/pkg/imgpull/types"
 )
 
 // Puller is the interface to the package for pulling images and manifests.
@@ -295,7 +295,7 @@ func (p *puller) regCliFrom() methods.RegClient {
 // type "www-authenticate" header like:
 //
 //		Bearer realm="https://auth.docker.io/token",service="registry.docker.io"
-//	    Bearer realm="https://ghcr.io/token",service="ghcr.io",scope="repository:aceeric/ociregistry:pull"
+//	    Bearer realm="https://ghcr.io/token",service="ghcr.io",scope="repository:yo-l1982/ociregistry:pull"
 //
 // The function returns the parsed result in a 'BearerAuth' struct.
 func parseBearer(authHdr string) types.BearerAuth {

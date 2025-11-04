@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/aceeric/imgpull/pkg/imgpull"
+	"github.com/yo-l1982/imgpull/pkg/imgpull"
 )
 
 // The program pulls an image tarball to the current working directory. The

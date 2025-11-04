@@ -13,11 +13,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aceeric/imgpull/internal/blobsync"
-	"github.com/aceeric/imgpull/internal/imgref"
-	"github.com/aceeric/imgpull/internal/testhelpers"
-	"github.com/aceeric/imgpull/mock"
-	"github.com/aceeric/imgpull/pkg/imgpull/types"
+	"github.com/yo-l1982/imgpull/internal/blobsync"
+	"github.com/yo-l1982/imgpull/internal/imgref"
+	"github.com/yo-l1982/imgpull/internal/testhelpers"
+	"github.com/yo-l1982/imgpull/mock"
+	"github.com/yo-l1982/imgpull/pkg/imgpull/types"
 )
 
 // Tests bearer auth

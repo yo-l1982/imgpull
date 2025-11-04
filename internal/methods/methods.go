@@ -8,10 +8,10 @@ import (
 	"os"
 	"strings"
 
-	"github.com/aceeric/imgpull/internal/blobsync"
-	"github.com/aceeric/imgpull/internal/imgref"
-	"github.com/aceeric/imgpull/internal/util"
-	"github.com/aceeric/imgpull/pkg/imgpull/types"
+	"github.com/yo-l1982/imgpull/internal/blobsync"
+	"github.com/yo-l1982/imgpull/internal/imgref"
+	"github.com/yo-l1982/imgpull/internal/util"
+	"github.com/yo-l1982/imgpull/pkg/imgpull/types"
 
 	"github.com/opencontainers/go-digest"
 )

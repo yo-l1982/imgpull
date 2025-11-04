@@ -12,8 +12,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/aceeric/imgpull/internal/util"
-	"github.com/aceeric/imgpull/pkg/imgpull/types"
+	"github.com/yo-l1982/imgpull/internal/util"
+	"github.com/yo-l1982/imgpull/pkg/imgpull/types"
 )
 
 // DockerTarManifest is the structure of 'manifest.json' that you would find

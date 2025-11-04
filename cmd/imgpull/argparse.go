@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/aceeric/imgpull/pkg/imgpull"
+	"github.com/yo-l1982/imgpull/pkg/imgpull"
 )
 
 var (

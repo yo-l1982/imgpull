@@ -79,7 +79,7 @@ https://localhost:8080/v2/curl/curl/manifests/8.10.1?ns=quay.io
 
 Note the query param: `?ns=quay.io`. The pull-through mirroring registry running on `localhost:8080` will check to see if `quay.io/curl/curl:8.10.1` is cached and if not, will pull and cache from the upstream `quay.io` registry. (Or the mirror will fail it only supports mirroring, and the desired image is not already cached.)
 
-For a highly configurable, performant, and feature-rich caching pull-through OCI distribution server that supports this functionality, see: my distribution server: https://github.com/aceeric/ociregistry.
+For a highly configurable, performant, and feature-rich caching pull-through OCI distribution server that supports this functionality, see: my distribution server: https://github.com/yo-l1982/ociregistry.
 
 ---
 **`-u|--user [username]` `-p|--password [password]`**

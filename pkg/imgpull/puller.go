@@ -3,8 +3,8 @@ package imgpull
 import (
 	"net/http"
 
-	"github.com/aceeric/imgpull/internal/imgref"
-	"github.com/aceeric/imgpull/pkg/imgpull/types"
+	"github.com/yo-l1982/imgpull/internal/imgref"
+	"github.com/yo-l1982/imgpull/pkg/imgpull/types"
 )
 
 // puller is the top-level abstraction. It carries everything that is needed to pull

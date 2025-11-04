@@ -15,11 +15,11 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/aceeric/imgpull/internal/tar"
-	"github.com/aceeric/imgpull/internal/testhelpers"
-	"github.com/aceeric/imgpull/internal/util"
-	"github.com/aceeric/imgpull/mock"
-	"github.com/aceeric/imgpull/pkg/imgpull/types"
+	"github.com/yo-l1982/imgpull/internal/tar"
+	"github.com/yo-l1982/imgpull/internal/testhelpers"
+	"github.com/yo-l1982/imgpull/internal/util"
+	"github.com/yo-l1982/imgpull/mock"
+	"github.com/yo-l1982/imgpull/pkg/imgpull/types"
 
 	"github.com/opencontainers/go-digest"
 )
@@ -43,10 +43,10 @@ func TestAuthParse(t *testing.T) {
 			realm:   "https://auth.docker.io/token",
 			service: "registry.docker.io",
 		}, {
-			hdr:     `Bearer realm="https://ghcr.io/token",service="ghcr.io",scope="repository:aceeric/ociregistry:pull"`,
+			hdr:     `Bearer realm="https://ghcr.io/token",service="ghcr.io",scope="repository:yo-l1982/ociregistry:pull"`,
 			realm:   "https://ghcr.io/token",
 			service: "ghcr.io",
-			scope:   "repository:aceeric/ociregistry:pull",
+			scope:   "repository:yo-l1982/ociregistry:pull",
 		},
 	}
 	for _, authHdrTest := range authHdrTests {

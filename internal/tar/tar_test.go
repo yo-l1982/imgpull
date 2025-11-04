@@ -8,8 +8,8 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/aceeric/imgpull/internal/testhelpers"
-	"github.com/aceeric/imgpull/pkg/imgpull/types"
+	"github.com/yo-l1982/imgpull/internal/testhelpers"
+	"github.com/yo-l1982/imgpull/pkg/imgpull/types"
 )
 
 // TestWriteFiles tests writing a physical file and a string "file"
