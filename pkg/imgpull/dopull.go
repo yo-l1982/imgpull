@@ -46,6 +46,8 @@ type Puller interface {
 	GetUrl() string
 	// GetOpts returns puller options
 	GetOpts() PullerOpts
+	// Close closes idle HTTP connections to prevent memory leaks
+	Close()
 }
 
 // HTTP status codes that we will interpret as un-authorized
@@ -318,4 +320,16 @@ func parseBearer(authHdr string) types.BearerAuth {
 		}
 	}
 	return ba
+}
+
+// Close closes idle HTTP connections in the puller's HTTP client to prevent
+// memory leaks. This should be called when the puller is no longer needed.
+func (p *puller) Close() {
+	if p.Client == nil {
+		return
+	}
+	// Close idle connections if a transport is configured
+	if transport, ok := p.Client.Transport.(*http.Transport); ok && transport != nil {
+		transport.CloseIdleConnections()
+	}
 }

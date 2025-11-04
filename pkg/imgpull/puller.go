@@ -61,13 +61,17 @@ func NewPullerWith(o PullerOpts) (Puller, error) {
 	if ir, err := imgref.NewImageRef(o.Url, o.Scheme, o.Namespace); err != nil {
 		return &puller{}, err
 	} else {
-		c := &http.Client{}
+		// Always create an explicit Transport (even without TLS config) to ensure
+		// proper connection cleanup and prevent memory leaks. When Transport is nil,
+		// Go uses the shared default transport which cannot be cleaned up per-client.
+		transport := &http.Transport{}
 		if cfg, err := o.configureTls(); err != nil {
 			return &puller{}, err
 		} else if cfg != nil {
-			c.Transport = &http.Transport{
-				TLSClientConfig: cfg,
-			}
+			transport.TLSClientConfig = cfg
+		}
+		c := &http.Client{
+			Transport: transport,
 		}
 		return &puller{
 			ImgRef: ir,
