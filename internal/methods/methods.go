@@ -16,12 +16,6 @@ import (
 	"github.com/opencontainers/go-digest"
 )
 
-const (
-	mebibytes        = 1024 * 1024
-	maxManifestBytes = 100 * mebibytes
-	maxBlobBytes     = 100 * mebibytes
-)
-
 // AuthHeader is a key/value struct that supports creating and setting an auth
 // header for the supported auth type (basic, bearer).
 type AuthHeader struct {
@@ -187,19 +181,11 @@ func (rc RegClient) V2BlobsInternal(layer types.Layer, toFile string) error {
 	}
 	defer blobFile.Close()
 
-	bytesRead := 0
-	for {
-		part, err := io.ReadAll(io.LimitReader(resp.Body, maxBlobBytes))
-		if err != nil {
-			return err
-		}
-		if len(part) == 0 {
-			break
-		}
-		bytesRead += len(part)
-		blobFile.Write(part)
+	bytesRead, err := io.Copy(blobFile, resp.Body)
+	if err != nil {
+		return err
 	}
-	if bytesRead != layer.Size {
+	if int(bytesRead) != layer.Size {
 		return fmt.Errorf("error getting blob - expected %d bytes, got %d bytes instead", layer.Size, bytesRead)
 	}
 	return nil
@@ -228,7 +214,7 @@ func (rc RegClient) V2Manifests(sha string) (ManifestGetResult, error) {
 		defer resp.Body.Close()
 	}
 	mediaType := resp.Header.Get("Content-Type")
-	manifestBytes, err := io.ReadAll(io.LimitReader(resp.Body, maxManifestBytes))
+	manifestBytes, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return ManifestGetResult{}, err
 	}
