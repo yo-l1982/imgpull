@@ -14,6 +14,7 @@ import (
 	"github.com/yo-l1982/imgpull/pkg/imgpull/types"
 
 	"github.com/opencontainers/go-digest"
+	"golang.org/x/sys/unix"
 )
 
 // AuthHeader is a key/value struct that supports creating and setting an auth
@@ -181,8 +182,7 @@ func (rc RegClient) V2BlobsInternal(layer types.Layer, toFile string) error {
 	}
 	defer blobFile.Close()
 
-	// Use explicit buffer to avoid page cache buildup when writing large blobs
-	// This limits page cache to at most 64KB per concurrent download
+	// Use explicit buffer for efficient download
 	buf := make([]byte, 64*1024)
 	bytesRead, err := io.CopyBuffer(blobFile, resp.Body, buf)
 	if err != nil {
@@ -191,6 +191,11 @@ func (rc RegClient) V2BlobsInternal(layer types.Layer, toFile string) error {
 	if int(bytesRead) != layer.Size {
 		return fmt.Errorf("error getting blob - expected %d bytes, got %d bytes instead", layer.Size, bytesRead)
 	}
+
+	// Tell kernel to drop this file from page cache (POSIX_FADV_DONTNEED)
+	// This prevents page cache buildup when downloading large blobs
+	unix.Fadvise(int(blobFile.Fd()), 0, 0, unix.FADV_DONTNEED)
+
 	return nil
 }
 
