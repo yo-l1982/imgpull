@@ -181,7 +181,10 @@ func (rc RegClient) V2BlobsInternal(layer types.Layer, toFile string) error {
 	}
 	defer blobFile.Close()
 
-	bytesRead, err := io.Copy(blobFile, resp.Body)
+	// Use explicit buffer to avoid page cache buildup when writing large blobs
+	// This limits page cache to at most 64KB per concurrent download
+	buf := make([]byte, 64*1024)
+	bytesRead, err := io.CopyBuffer(blobFile, resp.Body, buf)
 	if err != nil {
 		return err
 	}
