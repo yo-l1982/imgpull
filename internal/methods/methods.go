@@ -14,7 +14,6 @@ import (
 	"github.com/yo-l1982/imgpull/pkg/imgpull/types"
 
 	"github.com/opencontainers/go-digest"
-	"golang.org/x/sys/unix"
 )
 
 // AuthHeader is a key/value struct that supports creating and setting an auth
