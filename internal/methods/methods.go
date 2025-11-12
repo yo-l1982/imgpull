@@ -192,10 +192,6 @@ func (rc RegClient) V2BlobsInternal(layer types.Layer, toFile string) error {
 		return fmt.Errorf("error getting blob - expected %d bytes, got %d bytes instead", layer.Size, bytesRead)
 	}
 
-	// Tell kernel to drop this file from page cache (POSIX_FADV_DONTNEED)
-	// This prevents page cache buildup when downloading large blobs
-	unix.Fadvise(int(blobFile.Fd()), 0, 0, unix.FADV_DONTNEED)
-
 	return nil
 }
 
